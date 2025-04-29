@@ -1,0 +1,73 @@
+/* Estilos para Facturas Cliente */
+
+.facturas-cliente {
+    padding: 20px;
+    background-color: #0A071A; /* Fondo oscuro para coincidir con los otros formularios */
+    color: #fff; /* Color del texto blanco */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para el contenedor */
+}
+
+.input-cliente {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: calc(100% - 22px);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #2a2a2a; /* Fondo de los campos de entrada */
+    color: #fff; /* Color del texto */
+}
+
+.input-cliente::placeholder {
+    color: #aaa; /* Color del placeholder */
+}
+
+.button-cargar {
+    padding: 10px 15px;
+    background-color: #f76e11; /* Color del botón */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-cargar:hover {
+    background-color: #F5B70A; /* Color al pasar el ratón */
+}
+
+.facturas-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.factura-card {
+    background-color: #1d1d1d; /* Fondo de las tarjetas */
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 15px;
+    flex: 1 1 200px; /* Adaptable al tamaño del contenedor */
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    color: #fff; /* Color del texto en la tarjeta */
+}
+
+.factura-card:hover {
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Sombra más clara al pasar el ratón */
+}
+
+.detalles-factura {
+    margin-top: 20px;
+    color: #fff; /* Color del texto */
+}
+
+.detalle-item {
+    background-color: #2a2a2a; /* Fondo de los detalles de la factura */
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    color: #fff; /* Color del texto */
+}

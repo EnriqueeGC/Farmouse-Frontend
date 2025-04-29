@@ -1,0 +1,93 @@
+/* Estilos del formulario */
+.form-wrapper {
+    background-color: #0A071A;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px #fff;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Título del formulario */
+.form-wrapper h2 {
+    margin-bottom: 20px;
+    color: #ffffff; /* Color blanco para coincidir con el fondo oscuro */
+}
+
+/* Estilo de los campos del formulario */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #ffffff; /* Color blanco para el texto */
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #ffffff; /* Texto blanco */
+    background-color: transparent; /* Fondo oscuro para contraste */
+    outline: none;
+}
+
+/* Botón de envío */
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    background-color: #f76e11;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #F5B70A; /* Coincide con el hover del login */
+}
+
+/* Texto para alternar entre login y registro */
+.toggle-text {
+    margin-top: 15px;
+    color: #ffffff; /* Color blanco para el texto */
+    font-size: 0.9rem;
+}
+
+.toggle-text span {
+    color: #f76e11;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Botón de volver a inicio */
+.back-to-home-button {
+    position: fixed;
+    top: 20px; /* Separación desde la parte superior */
+    left: 20px; /* Separación desde el lado izquierdo */
+    z-index: 1000; /* Asegura que el botón esté encima de otros elementos */
+}
+
+.back-to-home-button button {
+    background-color: #f76e11;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.back-to-home-button button:hover {
+    background-color: #e65c00; /* Color en hover */
+}

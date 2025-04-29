@@ -1,0 +1,82 @@
+
+/* =========== google fonts =========== */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap");
+
+/* ======== base style ======= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  background: #F9FEFF;
+}
+
+section,
+footer {
+  padding: 70px 0px;
+}
+
+h1,
+h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  color: #000000;
+}
+
+p {
+  font-size: 1rem;
+  color: #000000;
+  line-height: 30px;
+  font-family: "Rubik", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+i {
+  color: #000000;
+}
+
+@media only screen and (max-width: 767px){
+
+  section{
+    padding: 40px;
+  }
+
+}
+.link-mapa-mesas {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.link-mapa-mesas button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.link-mapa-mesas button:hover {
+  background-color: #45a049;
+}
+
+.mapa-de-mesas-section {
+  margin: 40px auto;
+  text-align: center;
+}
+
+.mapa-de-mesas-section h2 {
+  margin-bottom: 20px;
+}

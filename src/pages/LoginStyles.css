@@ -1,0 +1,75 @@
+/* Estilos actualizados */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('../Multi/Fondolog.png'); /* Cambia la ruta por la ubicación de tu imagen */
+    background-size: cover;/* Para posicionar el botón "Volver a Inicio" */
+}
+
+.back-button {
+    position: absolute;
+    top: 20px; /* Separación desde la parte superior */
+    left: 20px; /* Separación desde el lado izquierdo */
+    margin-bottom: 20px;
+    
+}
+
+.form-wrapper {
+    background-color: #0A071A;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px #fff;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.form-container {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ffffff; /* Color blanco para el texto */
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #ffffff; /* Texto blanco */
+    background-color: #333333; /* Fondo oscuro para contraste */
+}
+
+.login-button, .register-button, .profile-button, .logout-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #00a9e0;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover, .register-button:hover, .profile-button:hover, .logout-button:hover {
+    background-color: #F5B70A;
+}
+
+.error-message {
+    color: #e74c3c;
+    margin-bottom: 10px;
+    font-weight: bold;
+}

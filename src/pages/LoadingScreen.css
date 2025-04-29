@@ -1,0 +1,24 @@
+/* LoadingScreen.css */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ocupa toda la pantalla */
+    background-color: #F8F6F0; /* Puedes ajustar el color de fondo */
+  }
+  
+  .loading-logo {
+    width: 150px;
+    height: auto;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+  

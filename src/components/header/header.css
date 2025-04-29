@@ -1,0 +1,210 @@
+.header {
+    background-color: #00a9e0;
+    padding: 40px 20px 10px; /* Espacio en la parte superior para el logo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+.logo-container {
+    background-color: white; /* Fondo blanco para el contenedor del logo */
+    padding: 20px 30px; /* Más espacio alrededor del logo */
+    border-radius: 12px; /* Bordes redondeados más suaves */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil para destacar */
+    margin-bottom: 30px; /* Más espacio debajo del contenedor */
+    text-align: center;
+    width: 350%;
+    max-width: 1290px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra el logo dentro del contenedor */
+}
+
+.logo img {
+    width: 300px !important; /* Aumenta aún más el tamaño del logo */
+    height: auto !important; /* Mantiene las proporciones */
+}
+
+/* Estilo de la barra de búsqueda */
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;  /* Cambiar esto para que ocupe más espacio */
+    max-width: 1000px; /* Limita el tamaño máximo de la barra */
+    margin: 15px auto;
+    gap: 20px;
+}
+
+/* Hacer que la barra de búsqueda ocupe el 80% del espacio */
+.search-input {
+    padding: 12px 20px;
+    width: 80%; /* Hace que la barra ocupe el 80% del espacio disponible dentro de su contenedor */
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+.right-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espacio entre los íconos */
+}
+
+/* Alineación de los íconos del carrito y login en una fila */
+.cart__icon, .login__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* Estilo de los botones del menú */
+.nav__menu {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+/* Estilo de los botones del menú */
+.nav__menu {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Espacio entre la barra de búsqueda y el menú */
+}
+
+.nav__list {
+    list-style: none;
+    display: flex;
+    gap: 20px; /* Espacio entre los elementos del menú */
+}
+
+/* Estilo del botón del menú con ícono circular */
+.nav-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+}
+
+/* Estilo de los botones del menú con imagen circular */
+.icon-button {
+    border-radius: 50%; /* Hace el botón completamente redondo */
+    padding: 18px; /* Tamaño ajustado para hacer un círculo perfecto */
+    font-size: 26px; /* Tamaño del ícono */
+    margin-bottom: 5px; /* Espacio entre el ícono y el texto */
+    border: 3px solid white; /* Borde blanco alrededor del ícono */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px; /* Tamaño consistente para todos los botones */
+    height: 70px; /* Asegura que el círculo sea perfecto */
+    transition: background-color 0.3s ease; /* Transición suave al pasar el ratón */
+}
+
+/* Estilo para las imágenes (sin el color de fondo) */
+.icon-button img {
+    width: 100%;  /* Asegura que la imagen ocupe todo el área del círculo */
+    height: 100%; /* Asegura que la imagen ocupe todo el área del círculo */
+    object-fit: cover; /* Recorta la imagen para ajustarse al círculo sin distorsión */
+}
+
+/* Estilo para el texto del botón */
+.nav-button span {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white; /* El texto dentro de los botones será blanco */
+    margin-top: 8px; /* Ajuste para que el texto quede centrado debajo del ícono */
+}
+
+/* Estilo de los botones al pasar el ratón */
+.nav-button:hover .icon-button {
+    background-color: #FF6347; /* Cambia el color de fondo al pasar el ratón */
+}
+
+/* Color y estilos para cada botón con base en el color */
+.nav__item:nth-child(1) .icon-button {
+    background-color: #F68B1E; /* Color personalizado para el primer botón */
+}
+
+.nav__item:nth-child(2) .icon-button {
+    background-color: #F286A8; /* Color personalizado para el segundo botón */
+}
+
+.nav__item:nth-child(3) .icon-button {
+    background-color: #ED1C24; /* Color personalizado para el tercer botón */
+}
+
+.nav__item:nth-child(4) .icon-button {
+    background-color: #9A2023; /* Color personalizado para el cuarto botón */
+}
+
+.nav__item:nth-child(5) .icon-button {
+    background-color: #ED1C24; /* Color personalizado para el quinto botón */
+}
+
+.nav__item:nth-child(6) .icon-button {
+    background-color: #000000; /* Color personalizado para el sexto botón */
+}
+
+.nav__item:nth-child(7) .icon-button {
+    background-color: #19B1E7; /* Color personalizado para el séptimo botón */
+}
+
+.nav__item:nth-child(8) .icon-button {
+    background-color: #454848; /* Color personalizado para el octavo botón */
+}
+
+.nav__item:nth-child(9) .icon-button {
+    background-color: #000000; /* Color personalizado para el noveno botón */
+}
+
+.nav__item:nth-child(10) .icon-button {
+    background-color: #F26522; /* Color personalizado para el décimo botón */
+}
+
+.nav__item:nth-child(11) .icon-button {
+    background-color: #98D4BF; /* Color personalizado para el undécimo botón */
+}
+
+.nav__item:nth-child(12) .icon-button {
+    background-color: #0056A8; /* Color personalizado para el duodécimo botón */
+}
+
+.nav__item:nth-child(13) .icon-button {
+    background-color: #2E3192; /* Color personalizado para el decimotercer botón */
+}
+
+.nav__item:nth-child(14) .icon-button {
+    background-color: #088146; /* Color personalizado para el decimocuarto botón */
+}
+
+/* Ajustes de espaciado y alineación */
+.nav__menu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.nav__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Espacio entre los elementos del menú */
+}
+
+/* Asegura que los botones sean visualmente atractivos y responsivos */
+.nav-button:hover .icon-button {
+    background-color: #e1d8d6; /* Cambio de color cuando el ratón pasa sobre el ícono */
+}
+
+/* Aseguramos que los íconos sean blancos */
+.cart__icon i, .login__icon i {
+    color: white; /* El color de los íconos será blanco */
+}
