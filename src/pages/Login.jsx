@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CrearClienteForm from './CrearClienteForm'; // Asegúrate de tener este componente correctamente
+import CrearClienteForm from './CrearClienteForm.jsx';
 import './LoginStyles.css';
 
 const Login = () => {
@@ -24,43 +24,42 @@ const Login = () => {
         setError('');
 
         try {
-            const response = await fetch('https://farmouse.onrender.com/api/login', {
+            const response = await fetch('https://farmouse.onrender.com/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify({ 
+                    nombre_usuario: username, 
+                    contrasenia: password 
+                }),
             });
 
             const data = await response.json();
 
-            try{
-                const responseId = await fetch(`https://federico-fazbear.onrender.com/api/cliente/${username}`, {
-                    headers: {
-                        'Content-Type': 'application/json', // Útil si tu API espera JSON
-                        // Añade otras cabeceras aquí si es necesario
-                    },
-                });
-
-                if (!responseId.ok) {
-                    throw new Error(`Error en la solicitud: ${response.status}`);
-                }
-            
-            
-            const apiId = await responseId.json(); // Parseo de la respuesta en JSON
-            console.log(apiId.idCliente);
-            localStorage.setItem('idLogeado',apiId.idCliente);
-            console.log(localStorage.getItem('idLogeado')); // Aquí puedes trabajar con `apiId`
-            } catch {
-                console.error('Error al obtener el Id del cliente:', error);
-            }
-
-
-
             if (response.ok) {
                 setToken(data.token);
                 localStorage.setItem('token', data.token);
-                localStorage.setItem('correoCliente', username);
+                localStorage.setItem('username', username);
+
+                try {
+                    const responseId = await fetch(`https://farmouse.onrender.com/user/getByName/${username}`, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+
+                    if (!responseId.ok) {
+                        throw new Error(`Error en la solicitud: ${responseId.status}`);
+                    }
+
+                    const apiId = await responseId.json();
+                    localStorage.setItem('idLogeado', apiId.id_usuario); 
+                    console.log("ID del cliente:", localStorage.getItem('idLogeado'));
+                } catch (error) {
+                    console.error('Error al obtener el Id del cliente:', error);
+                }
+
                 navigate('/user-profile');
             } else {
                 setError(data.error || 'Error al iniciar sesión');
@@ -73,7 +72,7 @@ const Login = () => {
     const handleLogout = () => {
         setToken(null);
         localStorage.removeItem('token');
-        localStorage.removeItem('correoCliente');
+        localStorage.removeItem('username');
     };
 
     const handleBackToHomeClick = () => navigate('/');
@@ -92,10 +91,10 @@ const Login = () => {
                     <div className="form-container">
                         <form onSubmit={handleLogin}>
                             <div className="form-group">
-                                <label>Correo</label>
+                                <label>Nombre de Usuario</label>
                                 <input
                                     type="text"
-                                    placeholder="Ingresa tu correo"
+                                    placeholder="Ingresa tu nombre de usuario"
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                     required

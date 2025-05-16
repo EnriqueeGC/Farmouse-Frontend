@@ -1,0 +1,32 @@
+.submenu-container {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.submenu-empty {
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 1rem;
+}
+
+.submenu-filled {
+    background-color: #00a9e0; /* Color celeste claro */
+    padding: 0; /* padding se gestiona por secciones */
+    color: white;
+}
+
+.submenu-title {
+    background-color: #003366; /* Azul oscuro para el título */
+    padding: 1rem;
+}
+
+.submenu-title h3 {
+    margin: 0;
+}
+
+.submenu-list {
+    list-style-type: none;
+    padding: 1rem;
+    margin: 0;
+}

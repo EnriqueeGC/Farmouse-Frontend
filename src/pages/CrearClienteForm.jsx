@@ -7,12 +7,10 @@ const CrearClienteForm = () => {
         correo: '',
         nombre: '',
         apellido: '',
-        nit: '',
         direccion: '',
         telefono: '',
-        fechaNacimiento: '',
-        password: '',
-        confirmPassword: ''
+        nombre_usuario: '',
+        contrasenia: '',
     });
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
@@ -29,25 +27,28 @@ const CrearClienteForm = () => {
         setError('');
         setMessage('');
 
-        if (formData.password !== formData.confirmPassword) {
-            setError('Las contraseñas no coinciden');
-            setLoading(false);
-            return;
-        }
-
         try {
-            const response = await axios.post('https://federico-fazbear.onrender.com/api/cliente/create', formData);
+            // Haciendo la solicitud para crear el usuario
+            const response = await axios.post('https://farmouse.onrender.com/user/', {
+                nombre: formData.nombre,
+                correo: formData.correo,
+                apellido: formData.apellido,
+                direccion: formData.direccion,
+                telefono: formData.telefono,
+                nombre_usuario: formData.nombre_usuario,
+                contrasenia: formData.contrasenia,
+                rol: 3, // Rol siempre será 3
+            });
+
             setMessage(response.data.message);
             setFormData({
                 correo: '',
                 nombre: '',
                 apellido: '',
-                nit: '',
                 direccion: '',
                 telefono: '',
-                fechaNacimiento: '',
-                password: '',
-                confirmPassword: ''
+                nombre_usuario: '',
+                contrasenia: '',
             });
         } catch (err) {
             setError('Error al crear Cliente y Usuario');
@@ -95,17 +96,6 @@ const CrearClienteForm = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label>NIT</label>
-                    <input
-                        type="text"
-                        name="nit"
-                        value={formData.nit}
-                        onChange={handleChange}
-                        placeholder="NIT"
-                        required
-                    />
-                </div>
-                <div className="form-group">
                     <label>Dirección</label>
                     <input
                         type="text"
@@ -128,36 +118,24 @@ const CrearClienteForm = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Fecha de Nacimiento</label>
+                    <label>Nombre de Usuario</label>
                     <input
-                        type="date"
-                        name="fechaNacimiento"
-                        value={formData.fechaNacimiento}
+                        type="text"
+                        name="nombre_usuario"
+                        value={formData.nombre_usuario}
                         onChange={handleChange}
-                        placeholder="Fecha de Nacimiento"
+                        placeholder="Nombre de Usuario"
                         required
-                        className="form-input" // Asegúrate de tener esta clase en los otros campos también
                     />
                 </div>
                 <div className="form-group">
                     <label>Contraseña</label>
                     <input
                         type="password"
-                        name="password"
-                        value={formData.password}
+                        name="contrasenia"
+                        value={formData.contrasenia}
                         onChange={handleChange}
                         placeholder="Contraseña"
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Confirmar Contraseña</label>
-                    <input
-                        type="password"
-                        name="confirmPassword"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        placeholder="Confirmar Contraseña"
                         required
                     />
                 </div>
