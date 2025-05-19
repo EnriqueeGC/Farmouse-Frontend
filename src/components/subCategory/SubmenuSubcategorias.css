@@ -30,3 +30,9 @@
     padding: 1rem;
     margin: 0;
 }
+
+.submenu-list li a:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  

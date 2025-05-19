@@ -14,6 +14,7 @@ import ErrorBoundary from './pages/ErrorBoundary';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import Checkout from './components/cart/Checkout';
+import ProductBySubcategory from './components/Product/ProductBySubcategory';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
                         <Route path="/seleccionar-ubicacion" element={<SeleccionarUbicacion />} /> 
                         <Route path="/cart" element={<Cart />} />
                         <Route path="/checkout" element={<Checkout />} />
+                        <Route path="/productos/subcategoria/:id_subcategoria" element={<ProductBySubcategory />} />
                     </Routes>
                 </Router>
                 </Elements>

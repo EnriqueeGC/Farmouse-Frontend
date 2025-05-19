@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
 import "./header.css";
-import { useRef } from 'react';
+import { useRef } from "react";
 import { Container } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../cart/CartContext";
@@ -133,6 +133,7 @@ const Header = () => {
 
   const [showSubmenu, setShowSubmenu] = useState(false);
   const [subcategory, setSubcategory] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(null);
 
   useEffect(() => {
     if (cartItems.length > 0) {
@@ -188,15 +189,16 @@ const Header = () => {
   const handleMouseEnterSubcategory = async (index, event) => {
     const categoriaId = navLinks[index].id;
     if (!categoriaId) return;
-
+  
     try {
       const response = await fetch(
         `https://farmouse.onrender.com/subcategory/category/${categoriaId}`
       );
       const data = await response.json();
       setSubcategory(data.data);
+      setActiveIndex(index); // <- importante
       setShowSubmenu(true);
-
+  
       const iconRect = event.currentTarget.getBoundingClientRect();
       setSubmenuPosition({
         top: iconRect.top + iconRect.height + window.scrollY,
@@ -206,9 +208,13 @@ const Header = () => {
       console.error("Error fetching subcategories:", error);
     }
   };
+  
 
   const handleMouseLeave = () => {
-    setTimeout(() => setShowSubmenu(false), 300);
+    setTimeout(() => {
+      setShowSubmenu(false);
+      setActiveIndex(null);
+    }, 200); // puedes ajustar el tiempo (ms)
   };
 
   return (
@@ -276,54 +282,57 @@ const Header = () => {
             style={{ display: "flex", listStyleType: "none" }}
           >
             {navLinks.map((item, index) => (
-              <li
-                key={index}
-                className="nav__item"
-                onMouseEnter={(e) => handleMouseEnterSubcategory(index, e)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Link className="nav-button">
-                  <div className="icon-button">
-                    <img
-                      src={item.imgSrc}
-                      alt={item.label}
-                      style={{ width: "40px", height: "40px" }}
-                    />
-                  </div>
-                </Link>
+              <li key={index} className="nav__item">
+                <div
+                  className="submenu-wrapper"
+                  onMouseEnter={(e) => handleMouseEnterSubcategory(index, e)}
+                  onMouseLeave={handleMouseLeave}
+                  style={{ position: "relative" }}
+                >
+                  <Link className="nav-button">
+                    <div className="icon-button">
+                      <img
+                        src={item.imgSrc}
+                        alt={item.label}
+                        style={{ width: "40px", height: "40px" }}
+                      />
+                    </div>
+                  </Link>
+
+                  {showSubmenu && activeIndex === index && (
+                    <div
+                      className="submenu-popover"
+                      style={{
+                        position: "absolute",
+                        top: "100%",
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        zIndex: 1000,
+                      }}
+                    >
+                      {Array.isArray(subcategory) && subcategory.length > 0 ? (
+                        <SubmenuSubcategorias subcategorias={subcategory} />
+                      ) : (
+                        <div
+                          className="submenu-container"
+                          style={{
+                            backgroundColor: "#f5f5f5",
+                            color: "#333",
+                            padding: "1rem",
+                            borderRadius: "8px",
+                            boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                          }}
+                        >
+                          <h3>No hay subcategorías disponibles</h3>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
               </li>
             ))}
           </ul>
         </div>
-
-        {showSubmenu && (
-          <div
-            style={{
-              position: "absolute",
-              transform: "translateX(-50%)",
-              zIndex: 1000,
-            }}
-            onMouseEnter={() => setShowSubmenu(true)}
-            onMouseLeave={handleMouseLeave}
-          >
-            {Array.isArray(subcategory) && subcategory.length > 0 ? (
-              <SubmenuSubcategorias subcategorias={subcategory} />
-            ) : (
-              <div
-                className="submenu-container"
-                style={{
-                  backgroundColor: "#f5f5f5",
-                  color: "#333",
-                  padding: "1rem",
-                  borderRadius: "8px",
-                  boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-                }}
-              >
-                <h3>No hay subcategorías disponibles</h3>
-              </div>
-            )}
-          </div>
-        )}
       </Container>
 
       {showDropdown && (
