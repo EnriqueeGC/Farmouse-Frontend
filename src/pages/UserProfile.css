@@ -3,73 +3,120 @@
 .user-profile {
     max-width: 600px;
     margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #0A071A; /* Cambiado para concordar con el fondo del formulario */
-    color: #fff; /* Color del texto */
+    padding: 25px 30px;
+    border: 2px solid #007bff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.15);
+    background-color: #f0f6ff; /* Azul muy claro para fondo */
+    color: #1a1a1a; /* Texto oscuro */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .user-profile h2 {
     text-align: center;
-    color: #fff; /* Cambiado para que el título sea blanco */
+    color: #004085; /* Azul oscuro */
+    margin-bottom: 20px;
 }
 
 .user-profile input {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #2a2a2a; /* Fondo de los campos de entrada */
-    color: #fff; /* Color del texto */
+    padding: 12px 15px;
+    margin: 12px 0;
+    border: 1.8px solid #007bff;
+    border-radius: 8px;
+    background-color: #f5faff; /* Fondo muy suave azul */
+    color: #004085; /* Texto azul oscuro */
+    font-weight: 600;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
 }
 
 .user-profile input::placeholder {
-    color: #aaa; /* Color del placeholder */
+    color: #7aa7e9; /* Azul claro para placeholder */
+}
+
+.user-profile input:focus {
+    outline: none;
+    border-color: #004085;
+    box-shadow: 0 0 6px #007bffaa;
 }
 
 .user-profile button {
-    padding: 10px 15px;
-    margin: 10px 5px;
+    padding: 12px 20px;
+    margin: 12px 8px 12px 0;
     border: none;
-    border-radius: 4px;
-    background-color: #f76e11; /* Color de fondo de los botones */
-    color: white;
+    border-radius: 12px;
+    background-color: #007bff; /* Azul principal */
+    color: #fff;
+    font-weight: 700;
+    font-size: 1em;
     cursor: pointer;
-    transition: background-color 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .user-profile button:hover {
-    background-color: #F5B70A; /* Color al pasar el ratón */
+    background-color: #004085; /* Azul oscuro al pasar mouse */
+    box-shadow: 0 6px 14px rgba(0, 64, 133, 0.6);
 }
 
 .user-profile p {
-    margin: 5px 0;
-    color: #fff; /* Cambiado para que el texto sea blanco */
+    margin: 8px 0;
+    color: #004085;
+    font-weight: 600;
+    font-size: 1em;
 }
 
 .reservas-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px; /* Espacio entre las tarjetas */
+    gap: 18px;
 }
 
 .card {
-    background: #1d1d1d; /* Fondo de las tarjetas */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 16px;
-    width: calc(33% - 16px); /* Ajusta el ancho según tu preferencia */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    background: #ffffff; /* Tarjetas blancas para contraste limpio */
+    border: 1.8px solid #007bff;
+    border-radius: 15px;
+    padding: 18px;
+    width: calc(33% - 18px);
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    color: #004085;
+    font-weight: 600;
 }
 
 .card:hover {
-    transform: scale(1.02);
+    transform: scale(1.04);
+    box-shadow: 0 8px 22px rgba(0, 123, 255, 0.25);
 }
 
 button {
-    margin-right: 10px; /* Espaciado entre botones */
+    margin-right: 12px;
 }
+
+.profile-image-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+  
+  .edit-photo-button {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    user-select: none;
+  }
+  
