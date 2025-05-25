@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CartContext } from '../cart/CartContext';
 import './cart.css';
 import axios from 'axios';
@@ -7,8 +7,11 @@ import axios from 'axios';
 const Cart = () => {
     const { cartItems, removeFromCart } = useContext(CartContext);
     const [quantitiesToRemove, setQuantitiesToRemove] = useState({});
+    const navigate = useNavigate();
 
     console.log("Artículos en el carrito:", cartItems); // Debug
+    // guardar el carrito en el localStorage
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
     if (cartItems.length === 0) {
         return <div className="empty-cart">El carrito está vacío</div>;
@@ -32,16 +35,8 @@ const Cart = () => {
     const totalCartAmount = cartItems.reduce((acc, item) => acc + (item.precio * (item.quantity || 1)), 0);
 
     const handleCheckout = async () => {
-        try {
-            const response = await axios.post('https://federicos-fazbear-backend.onrender.com/api/payment/create-checkout-session', { total: totalCartAmount });
-            if (response.data.url) {
-                window.location.href = response.data.url; // Redirige a la página de pago de Stripe
-            } else {
-                console.error("No se recibió una URL de pago.");
-            }
-        } catch (error) {
-            console.error("Error al redirigir al pago:", error);
-        }
+        // redireccionar al formulario de pago
+        navigate('/checkout-form');
     };
 
     return (

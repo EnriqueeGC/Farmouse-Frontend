@@ -7,7 +7,7 @@ import Footer from "../footer/Footer";
 import "./ProductBySubcategory.css";
 
 const ProductBySubcategory = () => {
-  const { id_subcategoria, nombre } = useParams();
+  const { id_subcategoria } = useParams();
   const [productos, setProductos] = useState([]);
   const [nombreSubcategoria, setNombreSubcategoria] = useState("");
   const [loading, setLoading] = useState(true);
@@ -15,32 +15,25 @@ const ProductBySubcategory = () => {
   useEffect(() => {
     const fetchDatos = async () => {
       try {
-        if (id_subcategoria) {
-          const productosResponse = await axios.get(
-            `https://farmouse.onrender.com/product/subcategoria/${id_subcategoria}`
-          );
-          setProductos(productosResponse.data.data);
-  
-          const subcategoriaResponse = await axios.get(
-            `https://farmouse.onrender.com/subcategory/${id_subcategoria}`
-          );
-          setNombreSubcategoria(subcategoriaResponse.data.data.nombre);
-        } else if (nombre) {
-          const productosResponse = await axios.get(
-            `https://farmouse.onrender.com/product/nombre/${nombre}`
-          );
-          setProductos(productosResponse.data.data);
-          setNombreSubcategoria(`Resultados para "${nombre}"`);
-        }
+        const productosResponse = await axios.get(
+          `https://farmouse.onrender.com/product/subcategoria/${id_subcategoria}`
+        );
+        setProductos(productosResponse.data.data);
+
+        // Obtener nombre de la subcategoría
+        const subcategoriaResponse = await axios.get(
+          `https://farmouse.onrender.com/subcategory/${id_subcategoria}`
+        );
+        setNombreSubcategoria(subcategoriaResponse.data.data.nombre); // Ajusta esto si el JSON tiene otra estructura
       } catch (error) {
         console.error("Error al obtener datos:", error);
       } finally {
         setLoading(false);
       }
     };
-  
+
     fetchDatos();
-  }, [id_subcategoria, nombre]);  
+  }, [id_subcategoria]);
 
   if (loading) return <p>Cargando productos...</p>;
 
