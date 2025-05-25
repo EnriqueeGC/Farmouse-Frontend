@@ -46,7 +46,7 @@ const CheckoutFormInner = () => {
 
         try {
             // 1. Registrar pedido
-            const response = await axios.post('http://localhost:3000/api/payment/register-payment', {
+            const response = await axios.post('https://farmouse.onrender.com/api/payment/register-payment', {
                 ...formData,
                 carrito: cartItems,
                 total: totalAmount,
@@ -56,7 +56,7 @@ const CheckoutFormInner = () => {
             setIdPedido(id_pedido);
 
             // 2. Crear PaymentIntent
-            const stripeResponse = await axios.post('http://localhost:3000/api/payment/create-payment-intent', {
+            const stripeResponse = await axios.post('https://farmouse.onrender.com/api/payment/create-payment-intent', {
                 id_pedido,
                 amount: total,
             });
@@ -89,7 +89,7 @@ const CheckoutFormInner = () => {
         } else {
             if (result.paymentIntent.status === 'succeeded') {
                 // Aquí puedes llamar a tu backend para registrar la venta y actualizar el pedido
-                await axios.post('http://localhost:3000/api/payment/confirm-payment', {
+                await axios.post('https://farmouse.onrender.com/api/payment/confirm-payment', {
                     id_pedido: idPedido
                 });
 
