@@ -1,45 +1,70 @@
-/* CheckoutForm.css */
-
-.checkout-form {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 25px;
-  border: 1px solid #ccc;
+.checkout-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #fff;
   border-radius: 12px;
-  background-color: #fafafa;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.checkout-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.checkout-form-user-info,
+.checkout-form-payment {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  font-family: Arial, sans-serif;
+  gap: 1rem;
 }
 
-.checkout-form input,
-.checkout-form textarea {
-  padding: 10px;
-  border: 1px solid #bbb;
-  border-radius: 8px;
-  font-size: 16px;
+.checkout-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.checkout-input,
+.checkout-textarea {
   width: 100%;
-  box-sizing: border-box;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
 }
 
-.checkout-form textarea {
+.checkout-textarea {
   resize: vertical;
   min-height: 80px;
 }
 
-.checkout-form button {
-  padding: 12px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+.checkout-total {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 1rem;
 }
 
-.checkout-form button:hover {
-  background-color: #218838;
+.checkout-btn {
+  padding: 0.9rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #27ae60;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #219150;
+}
+
+.checkout-card-element {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f9f9f9;
 }

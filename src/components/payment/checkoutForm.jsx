@@ -99,76 +99,132 @@ const CheckoutFormInner = () => {
       console.error("Error en el pago:", result.error.message);
     } else {
       if (result.paymentIntent.status === "succeeded") {
-        // Aquí puedes llamar a tu backend para registrar la venta y actualizar el pedido
-        await axios.post("https://farmouse.onrender.com/api/payment/confirm-payment", {
-          paymentIntentId: result.paymentIntent.id,
-        });
+        try {
+          // Confirmar el pago en tu backend
+          const confirmResponse = await axios.post(
+            "https://farmouse.onrender.com/api/payment/confirm-payment",
+            {
+              paymentIntentId: result.paymentIntent.id,
+            }
+          );
 
-        alert("Pago exitoso");
-        localStorage.removeItem("cartItems");
-        // Redirigir o mostrar mensaje final
+          alert("Pago exitoso");
+
+          // Descargar o abrir la factura
+          window.open(confirmResponse.data.factura_url, "_blank");
+
+          // Limpiar formulario
+          setFormData({
+            nombre: "",
+            apellido: "",
+            telefono: "",
+            direccion: "",
+            correo: "",
+            notas: "",
+          });
+
+          // Limpiar tarjeta
+          cardElement.clear();
+
+          // Limpiar carrito y estados relacionados
+          localStorage.removeItem("cartItems");
+          setCartItems([]);
+          setClientSecret("");
+          setIdPedido(null);
+          setTotalAmount(0);
+
+          // Redireccionar al menú principal
+          window.location.href = "/"; // Cambia esto según tu ruta
+        } catch (err) {
+          console.error("Error al confirmar el pago:", err);
+        }
       }
     }
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit} className="checkout-form">
-        <input
-          type="text"
-          name="nombre"
-          placeholder="Nombre"
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="apellido"
-          placeholder="Apellido"
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="correo"
-          placeholder="Correo electrónico"
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="tel"
-          name="telefono"
-          placeholder="Teléfono"
-          onChange={handleChange}
-          required
-        />
+    <div className="checkout-container">
+      <h2 className="checkout-title">Datos del pedido</h2>
+      <form onSubmit={handleSubmit} className="checkout-form-user-info">
+        <div className="checkout-row">
+          <input
+            type="text"
+            name="nombre"
+            placeholder="Nombre"
+            className="checkout-input checkout-nombre"
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="apellido"
+            placeholder="Apellido"
+            className="checkout-input checkout-apellido"
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="checkout-row">
+          <input
+            type="email"
+            name="correo"
+            placeholder="Correo electrónico"
+            className="checkout-input checkout-correo"
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="tel"
+            name="telefono"
+            placeholder="Teléfono"
+            className="checkout-input checkout-telefono"
+            onChange={handleChange}
+            required
+          />
+        </div>
+
         <input
           type="text"
           name="direccion"
           placeholder="Dirección de envío"
+          className="checkout-input checkout-direccion"
           onChange={handleChange}
           required
         />
+
         <textarea
           name="notas"
-          placeholder="Notas adicionales"
+          placeholder="Notas adicionales (opcional)"
+          className="checkout-textarea checkout-notas"
           onChange={handleChange}
         />
-        <p>
+
+        <p className="checkout-total">
           Total a pagar: <strong>${totalAmount.toFixed(2)}</strong>
         </p>
-        <button type="submit">Generar pedido</button>
+
+        <button type="submit" className="checkout-btn generate-order-btn">
+          Generar pedido
+        </button>
       </form>
 
       {clientSecret && (
-        <form onSubmit={handlePayment}>
-          <CardElement />
-          <button type="submit" disabled={!stripe}>
+        <form onSubmit={handlePayment} className="checkout-form-payment">
+          <h3 className="checkout-title">Datos de la tarjeta</h3>
+          <div className="checkout-card-element">
+            <CardElement />
+          </div>
+          <button
+            type="submit"
+            className="checkout-btn pay-btn"
+            disabled={!stripe}
+          >
             Pagar
           </button>
         </form>
       )}
-    </>
+    </div>
   );
 };
 

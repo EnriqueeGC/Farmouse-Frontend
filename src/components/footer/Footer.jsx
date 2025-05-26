@@ -1,127 +1,132 @@
-import React from "react";
+import React, { useState } from "react";
 import './footer.css';
 
-import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
-import logo from "../../assets/images/Logo.png";
+import { Container } from "reactstrap";
+import { FaFileAlt, FaCreditCard, FaShieldAlt, FaComments, FaFileInvoice } from "react-icons/fa";
 
-const footerQuickLinks = [
-  {
-    display: "Terms & Conditions",
-    url: "#",
-  },
-  {
-    display: "Privacy Policy",
-    url: "#",
-  },
-  {
-    display: "Return to Terms & Conditions",
-    url: "#",
-  },
-  {
-    display: "Payment Method",
-    url: "#",
-  },
-];
+import bolaImage from '../../assets/images/bola.png';
+import cameoVideo from '../../assets/images/cameo.mp4';
 
-const footerLinks = [
+const footerItems = [
   {
-    display: "MENÚ",
-    url: "/menu-pack",
+    icon: <FaFileAlt className="footer__icon" />,
+    title: "Cambios y devoluciones",
+    text: <>Revisa <a href="#">Términos y condiciones</a> y <a href="#">Política de privacidad</a>.</>,
   },
   {
-    display: "RESERVAS",
-    url: "/reservas",
+    icon: <FaCreditCard className="footer__icon" />,
+    title: "Formas de Pago",
+    text: <>Distintas opciones de pago con total seguridad.</>,
   },
   {
-    display: "SUCURSALES",
-    url: "/sucursales",
+    icon: <FaShieldAlt className="footer__icon" />,
+    title: "Compra 100% segura",
+    text: <>Tus compras están totalmente protegidas.</>,
+    addImage: true,
   },
   {
-    display: "AYUDA",
-    url: "/Ayuda",
+    icon: <FaComments className="footer__icon" />,
+    title: "Centros de ayuda",
+    text: <>Contáctanos vía whatsapp <br /> <a href="tel:+5525951595">55 2595 1595</a>.</>,
+  },
+  {
+    icon: <FaFileInvoice className="footer__icon" />,
+    title: "Facturación Electrónica",
+    text: <>Obtén tu <a href="#">factura electrónica</a> de manera rápida y confiable.</>,
   },
 ];
 
 const Footer = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
   return (
-    <footer className="footer">
-      <div className="footer__top">
-        <Container>
-          <Row>
-            <Col lg="4" md="4" sm="6">
-              <div
-                className="logo"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginBottom: "10px",
-                }}
-              >
-                <img src={logo} alt="Federico Fazbear Logo" />
-                <h2 className=" d-flex align-items-center gap-1 mb-4">
-                  Farmacias Dr Goku
-                </h2>
-              </div>
-              <p>
-                Nada paso en nuestros locales entre 1983 y 1987, dejen de
-                preguntar por favor.
-              </p>
-            </Col>
+    <>
+      <footer className="footer">
+        <div className="footer__top">
+          <Container style={{ padding: 0, maxWidth: '1200px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
+              {footerItems.map((item, i) => (
+                <div key={i} className="footer__item">
+                  {item.icon}
+                  <h5 className="footer__title">{item.title}</h5>
+                  <p className="footer__text">{item.text}</p>
+                  {item.addImage && (
+                    <img
+                    src={bolaImage}
+                    alt="bola"
+                    style={{
+                      width: '40px',
+                      marginTop: '8px',
+                      display: 'block',
+                      marginLeft: 'auto',
+                      marginRight: 'auto',
+                      cursor: 'pointer',
+                    }}
+                    onDoubleClick={openModal}  // Cambiado aquí a doble click
+                  />
+                  
+                  )}
+                </div>
+              ))}
+            </div>
+          </Container>
+        </div>
+      </footer>
 
-            <Col lg="2" md="4" sm="6">
-              <h5 className="footer__link-title">Info Links</h5>
-              <ListGroup>
-                {footerQuickLinks.map((item, index) => (
-                  <ListGroupItem key={index} className="link__item">
-                    <a href={item.url}>{item.display}</a>
-                  </ListGroupItem>
-                ))}
-              </ListGroup>
-            </Col>
-
-            <Col lg="2" md="4" sm="6">
-              <h5 className="footer__link-title">Quick Links</h5>
-              <ListGroup>
-                {footerLinks.map((item, index) => (
-                  <ListGroupItem key={index} className="link__item">
-                    <a href={item.url}>{item.display}</a>
-                  </ListGroupItem>
-                ))}
-              </ListGroup>
-            </Col>
-
-            <Col lg="2" md="4" sm="6">
-              <h5 className="footer__link-title">Contact</h5>
-              <ListGroup>
-                <ListGroupItem className="link__item d-flex align-items-center gap-3">
-                  <i className="ri-map-pin-line"></i> Sylhet, Bangladesh{" "}
-                </ListGroupItem>
-
-                <ListGroupItem className="link__item d-flex align-items-center gap-3">
-                  <i className="ri-mail-line"></i> example@gmail.com{" "}
-                </ListGroupItem>
-
-                <ListGroupItem className="link__item d-flex align-items-center gap-3">
-                  <i className="ri-phone-line"></i> +502 4485 1818
-                </ListGroupItem>
-              </ListGroup>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-      <div className="footer__bottom">
-        <Container>
-          <Row>
-            <Col lg="12">
-              <p>
-                copyright 2025, developed by Farmacias Dr Goku. All rights
-                reserved
-              </p>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    </footer>
+      {modalOpen && (
+        <div
+          className="modal-overlay"
+          onClick={closeModal}
+          style={{
+            position: 'fixed',
+            top: 0, left: 0, right: 0, bottom: 0,
+            backgroundColor: 'rgba(0,0,0,0.6)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 9999,
+          }}
+        >
+          <div
+            className="modal-content"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: 'relative',
+              background: '#fff',
+              padding: '10px',
+              borderRadius: '8px',
+              maxWidth: '90vw',
+              maxHeight: '80vh',
+            }}
+          >
+            <button
+              onClick={closeModal}
+              style={{
+                position: 'absolute',
+                top: '8px',
+                right: '8px',
+                background: 'transparent',
+                border: 'none',
+                fontSize: '24px',
+                cursor: 'pointer',
+              }}
+              aria-label="Cerrar modal"
+            >
+              &times;
+            </button>
+            <video
+              src={cameoVideo}
+              controls
+              autoPlay
+              style={{ maxWidth: '100%', maxHeight: '70vh', borderRadius: '6px' }}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
