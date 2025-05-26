@@ -18,11 +18,23 @@ import ProductBySubcategory from "./components/Product/ProductBySubcategory";
 import FloatingButton from "./pages/FloatingButton";
 import CheckoutForm from "./components/payment/checkoutForm";
 
+// admin
+import AdminLayout from './components/admin/AdminLayout';
+import AdminCategorias from './components/admin/AdminCategorias';
+import AdminSubcategorias from './components/admin/AdminSubcategorias';
+import AdminProductos from './components/admin/AdminProductos';
+import AdminPedidos from './components/admin/AdminPedidos'; // según ubicación
+import AdminVentas from './components/admin/AdminVentas'; //
+import AdminFacturas from './components/admin/AdminFacturas';
+import AdminUsuarios from './components/admin/AdminUsuarios';
+
+
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const stripePromise = loadStripe(
     "pk_test_51RLENcP996W6PblW39XAXAAWzXIGCaeL9zeXjxJcyfqQTzHZRZ7xzgCw0EPW5F5Jzvec2Y6kQEmrNOzUN8ptuewY00kqUh5MgN"
   );
+
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 2000);
     return () => clearTimeout(timer);
@@ -38,22 +50,29 @@ function App() {
         <Elements stripe={stripePromise}>
           <Router>
             <Routes>
+              {/* Rutas públicas */}
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/menu-pack" element={<MenuPack />} />
               <Route path="/user-profile" element={<UserProfile />} />
-              <Route
-                path="/seleccionar-ubicacion"
-                element={<SeleccionarUbicacion />}
-              />
+              <Route path="/seleccionar-ubicacion" element={<SeleccionarUbicacion />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
-              <Route
-                path="/productos/subcategoria/:id_subcategoria"
-                element={<ProductBySubcategory />}
-              />
+              <Route path="/productos/subcategoria/:id_subcategoria" element={<ProductBySubcategory />} />
               <Route path="/floating-button" element={<FloatingButton />} />
               <Route path="/checkout-form" element={<CheckoutForm />} />
+
+
+              {/* Rutas de administrador con sidebar */}
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route path="categorias" element={<AdminCategorias />} />
+                <Route path="subcategorias" element={<AdminSubcategorias />} />
+                <Route path="productos" element={<AdminProductos />} />
+                <Route path="/admin/pedidos" element={<AdminPedidos />} />
+                <Route path="/admin/ventas" element={<AdminVentas />} />
+                <Route path="/admin/facturas" element={<AdminFacturas />} />
+                <Route path="/admin/usuarios" element={<AdminUsuarios />} />
+              </Route>
             </Routes>
           </Router>
         </Elements>

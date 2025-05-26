@@ -1,24 +1,84 @@
-/* LoadingScreen.css */
 .loading-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Ocupa toda la pantalla */
-    background-color: #F8F6F0; /* Puedes ajustar el color de fondo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #ffffff;
+  overflow: hidden;
+  position: relative;
+}
+
+.loading-logo {
+  width: 160px;
+  height: auto;
+  position: relative;
+  z-index: 3;
+  animation: pulseScale 1.6s infinite ease-in-out;
+}
+
+/* Aura energética intensa */
+.loading-container::before {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  z-index: 2;
+  background: radial-gradient(circle at center, rgba(0, 102, 255, 0.9), transparent 70%);
+  filter: blur(65px) brightness(1.4);
+  animation: flameWave 2s infinite ease-in-out;
+}
+
+/* Escala vibrante */
+@keyframes pulseScale {
+  0%, 100% {
+    transform: scale(1);
   }
-  
-  .loading-logo {
-    width: 150px;
-    height: auto;
-    animation: pulse 1.5s ease-in-out infinite;
+  50% {
+    transform: scale(1.1);
   }
-  
-  @keyframes pulse {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
+}
+
+/* Movimiento tipo aura */
+@keyframes flameWave {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 0.85;
   }
-  
+  50% {
+    transform: scale(1.15) translateY(-10px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 0.85;
+  }
+}
+
+/* 💥 Chispas energéticas flotantes */
+.spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #00aaff;
+  border-radius: 50%;
+  opacity: 0.9;
+  z-index: 1;
+  animation: floatSpark 2.5s linear infinite;
+  box-shadow: 0 0 12px #00aaff;
+}
+
+@keyframes floatSpark {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-40px) scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-80px) scale(0.8);
+    opacity: 0;
+  }
+}

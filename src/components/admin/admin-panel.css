@@ -1,0 +1,153 @@
+/* admin-panel.css - Futurista tipo "Apple Intelligence" para farmacia inteligente */
+
+:root {
+  --primary: #2563eb;
+  --bg: #f7faff;
+  --card-bg: #ffffff;
+  --accent: #60a5fa;
+  --text: #111827;
+  --muted: #6b7280;
+}
+
+.admin-page {
+  min-height: 100vh;
+  padding: 3rem 1rem;
+  display: flex;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+
+  background: linear-gradient(145deg, #f0f4ff, #e6f0ff, #dbeafe);
+  background-size: 300% 300%;
+  animation: pulseBackground 20s ease infinite;
+}
+
+@keyframes pulseBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.admin-container {
+  width: 100%;
+  max-width: 1400px;
+  margin-left: 250px;
+}
+
+.admin-title {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: var(--primary);
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.admin-form-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+  margin-bottom: 3rem;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.admin-form-card h4 {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  color: var(--text);
+}
+
+.admin-form-card .form-control,
+.admin-form-card .form-select {
+  border-radius: 12px;
+  font-size: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.admin-form-card .form-control:focus,
+.admin-form-card .form-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3);
+}
+
+.admin-form-card .btn {
+  font-weight: 600;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 12px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.admin-form-card .btn:hover {
+  background-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.table thead {
+  background-color: #e8f0fe;
+  font-size: 1rem;
+  color: var(--text);
+  text-align: center;
+  border-radius: 8px;
+}
+
+.table td img,
+.admin-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.table .btn-sm {
+  border-radius: 10px;
+  font-weight: 500;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  background-color: #eff6ff;
+  border: 1px solid #dbeafe;
+  transition: all 0.2s ease;
+}
+
+.table .btn-sm:hover {
+  background-color: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+@media (max-width: 991px) {
+  .admin-container {
+    margin-left: 0;
+  }
+
+  .admin-form-card {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .admin-title {
+    font-size: 1.8rem;
+  }
+
+  .admin-form-card .row > div {
+    margin-bottom: 1rem;
+  }
+}

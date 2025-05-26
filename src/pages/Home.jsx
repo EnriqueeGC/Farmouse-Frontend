@@ -7,6 +7,8 @@ import FloatingButton from './FloatingButton';
 import Slider from '../components/slider/Slider';
 import VideoPromocional from './video';
 import NuestrasMarcas from './NuestrasMarcas';
+import PorqueElegirnos from '../pages/PorqueElegirnos';
+import Testimonios from '../pages/Testimonios';
 
 const Home = () => {
     return (
@@ -14,6 +16,8 @@ const Home = () => {
             <Header />
             <Slider />
             <Products/>
+            <PorqueElegirnos />
+            <Testimonios />
             <NuestrasMarcas/>
             <VideoPromocional/>
             <Footer />

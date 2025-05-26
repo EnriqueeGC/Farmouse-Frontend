@@ -1,0 +1,83 @@
+.porque-section {
+  background: #ffffff; /* Fondo blanco para resaltar aura */
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.porque-title {
+  font-size: 2rem;
+  color: #0f0f0f;
+  font-weight: 700;
+  margin-bottom: 3rem;
+}
+
+.porque-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Carta con animación y aura */
+.feature-card {
+  position: relative;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  animation: floatCard 4s ease-in-out infinite;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  background: radial-gradient(circle at center, rgba(0, 175, 255, 0.35), transparent 60%);
+  filter: blur(20px);
+  animation: auraPulse 3s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes floatCard {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes auraPulse {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1) rotate(2deg);
+    opacity: 0.9;
+  }
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(56, 189, 248, 0.2);
+}
+
+.feature-card h4 {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #111827;
+}
+
+.feature-card p {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #6b7280;
+}

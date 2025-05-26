@@ -1,0 +1,81 @@
+/* admin-layout.css - Estilo futurista inspirado en Apple */
+
+:root {
+  --sidebar-bg: #1e293b;
+  --sidebar-hover: #334155;
+  --text-light: #ffffff;
+  --accent: #38bdf8;
+  --background-main: #f8fafc;
+}
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f4f7fa, #e6f0ff, #d7e7ff);
+  background-size: 400% 400%;
+  animation: pulseBackground 15s ease infinite;
+}
+
+@keyframes pulseBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.admin-sidebar {
+  width: 260px;
+  background-color: var(--sidebar-bg);
+  padding: 2rem 1rem;
+  color: var(--text-light);
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+}
+
+.admin-sidebar h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--accent);
+}
+
+.admin-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-sidebar li {
+  margin: 1rem 0;
+}
+
+.admin-sidebar a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 1rem;
+  display: block;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.admin-sidebar a:hover,
+.admin-sidebar a.active {
+  background-color: var(--sidebar-hover);
+  color: var(--accent);
+}
+
+.admin-content {
+  flex: 1;
+  padding: 3rem;
+  background-color: var(--background-main);
+  transition: background-color 0.3s ease;
+}
