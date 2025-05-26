@@ -1,6 +1,6 @@
-// src/components/admin/AdminLayout.jsx
 import { Link, Outlet } from 'react-router-dom';
 import './AdminLayout.css';
+import { FaHome } from 'react-icons/fa'; // 👈 Importa el ícono
 
 function AdminLayout() {
   return (
@@ -19,8 +19,13 @@ function AdminLayout() {
           </ul>
         </nav>
       </aside>
+
       <main className="admin-content">
         <Outlet />
+        {/* Botón burbuja para regresar al home */}
+        <Link to="/" className="bubble-return-button" title="Volver al inicio">
+          <FaHome size={20} />
+        </Link>
       </main>
     </div>
   );
