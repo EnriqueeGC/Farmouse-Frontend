@@ -43,27 +43,34 @@ function AdminUsuarios() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = new FormData();
-    for (let key in form) {
-      if (form[key] !== null) {
-        data.append(key, form[key]);
-      }
-    }
+  e.preventDefault();
 
-    try {
-      if (editId) {
-        await axios.put(`https://farmouse.onrender.com/user/${editId}`, data);
-      } else {
-        await axios.post("https://farmouse.onrender.com/user", data);
-      }
-      obtenerUsuarios();
-      resetForm();
-    } catch (err) {
-      console.error("❌ Error al guardar usuario:", err);
-      alert("Error al guardar usuario: " + (err.response?.data?.message || "desconocido"));
+  const data = new FormData();
+
+  // 🧠 Garantizar que el rol sea enviado correctamente
+  data.append("rol", form.rol);
+  console.log("Rol seleccionado:", form.rol);
+
+  for (let key in form) {
+    if (form[key] !== null && key !== "rol") {
+      data.append(key, form[key]);
     }
-  };
+  }
+
+  try {
+    if (editId) {
+      await axios.put(`https://farmouse.onrender.com/user/${editId}`, data);
+    } else {
+      await axios.post("https://farmouse.onrender.com/user", data);
+    }
+    obtenerUsuarios();
+    resetForm();
+  } catch (err) {
+    console.error("❌ Error al guardar usuario:", err);
+    alert("Error al guardar usuario: " + (err.response?.data?.message || "desconocido"));
+  }
+};
+
 
   const handleEdit = (usuario) => {
     setForm({

@@ -18,18 +18,27 @@ body {
 
 /* Contenedor del perfil */
 .user-profile {
-  position: relative;
-  max-width: 1000px;
-  margin: 60px auto;
-  padding: 50px 60px;
+  width: 90vw;
+  max-width: 600px;
+  min-height: 600px;
+  aspect-ratio: 1 / 1.1; /* 👈 Proporción visual cuadrada */
+  margin: 0 auto;
+  padding: 50px 40px;
   border-radius: 30px;
   background: linear-gradient(135deg, #f7fcff, #eaf6ff);
-  box-shadow: 0 10px 40px rgba(0, 123, 255, 0.25);
+  box-shadow: 0 12px 45px rgba(0, 123, 255, 0.25);
   color: #001f3f;
   font-family: 'Segoe UI', sans-serif;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   backdrop-filter: blur(6px);
+  animation: fadeInSlide 0.6s ease-in-out;
 }
+
+
 
 /* Animación interna del fondo */
 .user-profile::before {
@@ -173,4 +182,17 @@ body {
 .btn-logout:hover {
   background-color: #b02a37;
   transform: translateY(-2px);
+}
+
+
+.user-profile-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(-45deg, #f0fcff, #e3f2fd, #eaf6ff, #d6f5ff);
+  background-size: 400% 400%;
+  animation: gradient-scroll 18s ease infinite;
+  margin: 0;
+  padding: 0;
 }

@@ -1,4 +1,4 @@
-/* admin-layout.css - Estilo futurista inspirado en Apple */
+/* admin-layout.css - Estilo futurista inspirado en Apple con animación de navegación */
 
 :root {
   --sidebar-bg: #1e293b;
@@ -6,6 +6,7 @@
   --text-light: #ffffff;
   --accent: #38bdf8;
   --background-main: #f8fafc;
+  --highlight-color: #38bdf8;
 }
 
 .admin-layout {
@@ -51,10 +52,14 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .admin-sidebar li {
   margin: 1rem 0;
+  position: relative;
 }
 
 .admin-sidebar a {
@@ -65,12 +70,24 @@
   padding: 0.6rem 1rem;
   border-radius: 10px;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .admin-sidebar a:hover,
 .admin-sidebar a.active {
-  background-color: var(--sidebar-hover);
   color: var(--accent);
+}
+
+.admin-sidebar .highlight-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background-color: var(--highlight-color);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  z-index: 0;
 }
 
 .admin-content {
@@ -102,5 +119,15 @@
   transform: scale(1.1);
 }
 
-
-
+/* Barra animada debajo del enlace activo */
+.highlight-bar {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  left: 0;
+  width: 0;
+  pointer-events: none;
+}

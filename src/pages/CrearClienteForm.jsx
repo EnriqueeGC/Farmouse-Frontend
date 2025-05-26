@@ -59,7 +59,7 @@ const CrearClienteForm = () => {
 
     return (
         <div className="form-wrapper">
-            <h2>Crear Cliente y Usuario</h2>
+            <h2>Crear Usuario</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Correo</label>
