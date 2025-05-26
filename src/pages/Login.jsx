@@ -38,31 +38,16 @@ const Login = () => {
             const data = await response.json();
 
             if (response.ok) {
-                setToken(data.token);
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('username', username);
+                const usuario = data.data;
 
-                try {
-                    const responseId = await fetch(`https://farmouse.onrender.com/user/getByName/${username}`, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    });
-
-                    if (!responseId.ok) {
-                        throw new Error(`Error en la solicitud: ${responseId.status}`);
-                    }
-
-                    const apiId = await responseId.json();
-                    localStorage.setItem('idLogeado', apiId.id_usuario); 
-                    console.log("ID del cliente:", localStorage.getItem('idLogeado'));
-                } catch (error) {
-                    console.error('Error al obtener el Id del cliente:', error);
-                }
+                setToken(usuario.token);
+                localStorage.setItem('token', usuario.token);
+                localStorage.setItem('username', usuario.nombre_usuario);
+                localStorage.setItem('idLogeado', usuario.id_usuario);
 
                 navigate('/user-profile');
             } else {
-                setError(data.error || 'Error al iniciar sesión');
+                setError(data.message || 'Error al iniciar sesión');
             }
         } catch (error) {
             setError('Ocurrió un problema al conectar con el servidor.');
@@ -73,6 +58,7 @@ const Login = () => {
         setToken(null);
         localStorage.removeItem('token');
         localStorage.removeItem('username');
+        localStorage.removeItem('idLogeado');
     };
 
     const handleBackToHomeClick = () => navigate('/');

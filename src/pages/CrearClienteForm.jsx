@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './NuevoRegistro.css'; // Asegúrate de que este archivo contenga los nuevos estilos actualizados
+import './NuevoRegistro.css';
 
 const CrearClienteForm = () => {
     const [formData, setFormData] = useState({
@@ -28,7 +28,6 @@ const CrearClienteForm = () => {
         setMessage('');
 
         try {
-            // Haciendo la solicitud para crear el usuario
             const response = await axios.post('https://farmouse.onrender.com/user/', {
                 nombre: formData.nombre,
                 correo: formData.correo,
@@ -36,11 +35,11 @@ const CrearClienteForm = () => {
                 direccion: formData.direccion,
                 telefono: formData.telefono,
                 nombre_usuario: formData.nombre_usuario,
-                contrasenia: formData.contrasenia,
-                rol: 3, // Rol siempre será 3
+                contrasenia: formData.contrasenia, // Enviar como texto plano
+                rol: 3,
             });
 
-            setMessage(response.data.message);
+            setMessage(response.data.message || 'Cliente creado exitosamente');
             setFormData({
                 correo: '',
                 nombre: '',
@@ -59,85 +58,36 @@ const CrearClienteForm = () => {
     };
 
     return (
-        <div className="form-wrapper"> {/* Estilos actualizados para coincidir con el login */}
+        <div className="form-wrapper">
             <h2>Crear Cliente y Usuario</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Correo</label>
-                    <input
-                        type="email"
-                        name="correo"
-                        value={formData.correo}
-                        onChange={handleChange}
-                        placeholder="Correo"
-                        required
-                    />
+                    <input type="email" name="correo" value={formData.correo} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
                     <label>Nombre</label>
-                    <input
-                        type="text"
-                        name="nombre"
-                        value={formData.nombre}
-                        onChange={handleChange}
-                        placeholder="Nombre"
-                        required
-                    />
+                    <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
                     <label>Apellido</label>
-                    <input
-                        type="text"
-                        name="apellido"
-                        value={formData.apellido}
-                        onChange={handleChange}
-                        placeholder="Apellido"
-                        required
-                    />
+                    <input type="text" name="apellido" value={formData.apellido} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
                     <label>Dirección</label>
-                    <input
-                        type="text"
-                        name="direccion"
-                        value={formData.direccion}
-                        onChange={handleChange}
-                        placeholder="Dirección"
-                        required
-                    />
+                    <input type="text" name="direccion" value={formData.direccion} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
                     <label>Teléfono</label>
-                    <input
-                        type="text"
-                        name="telefono"
-                        value={formData.telefono}
-                        onChange={handleChange}
-                        placeholder="Teléfono"
-                        required
-                    />
+                    <input type="text" name="telefono" value={formData.telefono} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
                     <label>Nombre de Usuario</label>
-                    <input
-                        type="text"
-                        name="nombre_usuario"
-                        value={formData.nombre_usuario}
-                        onChange={handleChange}
-                        placeholder="Nombre de Usuario"
-                        required
-                    />
+                    <input type="text" name="nombre_usuario" value={formData.nombre_usuario} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
                     <label>Contraseña</label>
-                    <input
-                        type="password"
-                        name="contrasenia"
-                        value={formData.contrasenia}
-                        onChange={handleChange}
-                        placeholder="Contraseña"
-                        required
-                    />
+                    <input type="password" name="contrasenia" value={formData.contrasenia} onChange={handleChange} required />
                 </div>
                 <button type="submit" className="btn-primary" disabled={loading}>
                     {loading ? 'Creando...' : 'Crear Cliente y Usuario'}
