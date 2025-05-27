@@ -4,7 +4,6 @@ import CrearClienteForm from './CrearClienteForm.jsx';
 import './LoginStyles.css';
 import logoImg from '../assets/images/Logo.png';
 
-
 const Login = () => {
     const [isRightPanelActive, setIsRightPanelActive] = useState(false);
     const [username, setUsername] = useState('');
@@ -54,7 +53,7 @@ const Login = () => {
             <div className={`login-container ${isRightPanelActive ? 'right-panel-active' : ''}`}>
                 <div className="form-container sign-in-container">
                     <form onSubmit={handleLogin}>
-                        <h2>Iniciar Sesión</h2>
+                        <h2 className="animated-title">Iniciar Sesión</h2>
                         <input
                             type="text"
                             placeholder="Nombre de usuario"
@@ -81,18 +80,24 @@ const Login = () => {
                 <div className="overlay-container">
                     <div className="overlay">
                         <div className="overlay-panel overlay-left">
-                            {/* Imagen superior izquierda (inicio de sesión) */}
-                              <img src={logoImg} alt="Logo de Farmacia" className="overlay-image float-rotate" />   
-                            <h1>¡Bienvenido de nuevo! Farmacias Doctor Goku</h1>
+                            {/* Logo con animación */}
+                            <img src={logoImg} alt="Logo de Farmacia" className="overlay-image float-rotate" />
+                            {/* Chispas decorativas */}
+                            <div className="spark" style={{ top: '30px', left: '60px' }}></div>
+                            <div className="spark" style={{ top: '90px', left: '20px' }}></div>
+
+                            <h1 className="animated-title">¡Bienvenido de nuevo! Farmacias Doctor Goku</h1>
                             <p>Para mantenerse conectado, por favor inicia sesión</p>
                             <button className="ghost" onClick={() => setIsRightPanelActive(false)}>
                                 Iniciar Sesión
                             </button>
                         </div>
                         <div className="overlay-panel overlay-right">
-                            {/* Imagen superior derecha (registro) */}
                             <img src={logoImg} alt="Logo de Farmacia" className="overlay-image float-rotate" />
-                            <h1>Farmacias Doctor Goku</h1>
+                            <div className="spark" style={{ top: '40px', right: '50px' }}></div>
+                            <div className="spark" style={{ top: '120px', right: '30px' }}></div>
+
+                            <h1 className="animated-title">Farmacias Doctor Goku</h1>
                             <p>Ingresa tus datos y crea tu cuenta</p>
                             <button className="ghost" onClick={() => setIsRightPanelActive(true)}>
                                 Crear Cuenta

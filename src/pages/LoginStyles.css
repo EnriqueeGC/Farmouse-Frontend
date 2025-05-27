@@ -21,7 +21,52 @@
   100% { box-shadow: 0 0 0 0 rgba(52, 144, 226, 0); }
 }
 
-/* CONTENEDOR PRINCIPAL */
+@keyframes pulseScale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes flameWave {
+  0% {
+    transform: scale(1) translateY(0);
+    box-shadow: 0 0 20px rgba(0, 204, 255, 0.3);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.2) translateY(-10px);
+    box-shadow: 0 0 40px rgba(0, 204, 255, 0.7);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    box-shadow: 0 0 20px rgba(0, 204, 255, 0.3);
+    opacity: 0.85;
+  }
+}
+
+
+@keyframes floatSpark {
+  0% { transform: translateY(0) scale(1); opacity: 0.8; }
+  50% { transform: translateY(-40px) scale(1.5); opacity: 1; }
+  100% { transform: translateY(-80px) scale(0.8); opacity: 0; }
+}
+
+.spark {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, #00cfff 0%, #0088ff 70%);
+  border-radius: 50%;
+  opacity: 1;
+  z-index: 3;
+  animation: floatSpark 2.8s ease-in-out infinite;
+  box-shadow:
+    0 0 10px #00cfff,
+    0 0 20px #00cfff,
+    0 0 30px #00cfff;
+}
+
+
 .login-page .login-container {
   background: linear-gradient(135deg, #e8f0ff 0%, #f0f7ff 100%);
   display: flex;
@@ -33,7 +78,6 @@
   padding: 20px;
 }
 
-/* CONTENEDOR GENERAL */
 .login-page .container {
   background: white;
   border-radius: 20px;
@@ -47,7 +91,6 @@
   transition: all 0.6s ease-in-out;
 }
 
-/* FORMULARIOS EN TARJETA */
 .login-page .form-container {
   position: absolute;
   top: 0;
@@ -79,25 +122,18 @@
   animation: floatCard 3s ease-in-out infinite;
 }
 
-.login-page .form-container h2 {
+.login-page .form-container h2,
+.login-page .overlay-panel h1 {
   text-align: center;
   margin-bottom: 24px;
   font-weight: bold;
   font-size: 2rem;
   color: #333;
-  animation: glowTitle 2.5s ease-in-out infinite;
+  animation: glowTitle 2.5s ease-in-out infinite, pulseScale 3s ease-in-out infinite;
 }
 
-/* SIGN IN/UP CONTROL */
-.login-page .sign-in-container {
-  left: 0;
-}
-
-.login-page .sign-up-container {
-  left: 0;
-  opacity: 0;
-  z-index: 1;
-}
+.login-page .sign-in-container { left: 0; }
+.login-page .sign-up-container { left: 0; opacity: 0; z-index: 1; }
 
 .login-page .login-container.right-panel-active .sign-up-container {
   transform: translateX(100%);
@@ -111,7 +147,6 @@
   z-index: 1;
 }
 
-/* CAMPOS DE TEXTO */
 .login-page input {
   background-color: #f4f7ff;
   border: 1px solid #d2d9ff;
@@ -128,7 +163,6 @@
   outline: none;
 }
 
-/* BOTONES */
 .login-page button {
   border-radius: 30px;
   border: none;
@@ -165,7 +199,6 @@
   background-color: #eaf1ff;
 }
 
-/* OVERLAY (PANEL DERECHO) */
 .login-page .overlay-container {
   position: absolute;
   top: 0;
@@ -213,25 +246,11 @@
   animation: fadeInSlide 0.8s ease-in-out;
 }
 
-.login-page .overlay-left {
-  transform: translateX(-20%);
-  left: 0;
-}
+.login-page .overlay-left { transform: translateX(-20%); left: 0; }
+.login-page .overlay-right { right: 0; transform: translateX(0); }
+.login-page .login-container.right-panel-active .overlay-left { transform: translateX(0); }
+.login-page .login-container.right-panel-active .overlay-right { transform: translateX(20%); }
 
-.login-page .overlay-right {
-  right: 0;
-  transform: translateX(0);
-}
-
-.login-page .login-container.right-panel-active .overlay-left {
-  transform: translateX(0);
-}
-
-.login-page .login-container.right-panel-active .overlay-right {
-  transform: translateX(20%);
-}
-
-/* TEXTO Y ERRORES */
 .login-page h1,
 .login-page h2 {
   font-weight: 700;
@@ -258,11 +277,11 @@
   font-size: 0.95rem;
 }
 
-/* BOTÓN VOLVER */
 .login-page .back-button {
   position: absolute;
   top: 20px;
   left: 20px;
+  z-index: 9999;
 }
 
 .login-page .back-button button {
@@ -282,7 +301,6 @@
   color: #fff;
 }
 
-/* RESPONSIVE */
 @media screen and (max-width: 768px) {
   .login-page .container {
     flex-direction: column;
@@ -306,18 +324,10 @@
   }
 }
 
-.login-page .back-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 9999; /* Asegura que no quede tapado por overlay */
-}
-
-
 .login-page button.ghost {
-    background-color: transparent;
-    border: 2px solid #4a90e2;
-    color: #f8f9fa;
+  background-color: transparent;
+  border: 2px solid #4a90e2;
+  color: #f8f9fa;
 }
 
 .login-page .overlay-image {
@@ -328,7 +338,19 @@
 }
 
 .overlay-image.float-rotate {
-  animation: 
-    float 6s ease-in-out infinite,
-    rotate-logo 30s linear infinite;
+  animation: float 6s ease-in-out infinite, rotate-logo 30s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes rotate-logo {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animated-title {
+  animation: glowTitle 2.5s ease-in-out infinite, pulseScale 3s ease-in-out infinite;
 }
