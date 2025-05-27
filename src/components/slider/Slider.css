@@ -85,3 +85,41 @@
     background: #a3123e;
   }
   
+  @media screen and (max-width: 768px) {
+  .slider-container {
+    flex-direction: column;
+    padding: 0 15px;
+  }
+
+  .slider-left,
+  .slider-right {
+    width: 100%;
+    padding: 0;
+  }
+
+  .slider-left {
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .slider-mini-image {
+    height: auto;
+    width: 48%;
+  }
+
+  .slider-main-image {
+    height: 250px;
+  }
+
+  .slider-btn {
+    width: 26px;
+    height: 26px;
+    font-size: 18px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+}
