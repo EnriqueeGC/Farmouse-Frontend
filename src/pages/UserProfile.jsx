@@ -3,6 +3,8 @@ import LoadingScreen from '../pages/LoadingScreen';
 import './UserProfile.css';
 import { useNavigate } from 'react-router-dom';
 import defaultProfile from "../assets/images/Def.jpg";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -121,6 +123,7 @@ const UserProfile = () => {
 
   const ImageModal = () => (
     <div className="image-modal">
+      
       <div className="image-modal-content">
         <h3>Editar imagen del perfil</h3>
         <div className="image-preview">
@@ -137,7 +140,10 @@ const UserProfile = () => {
   );
 
   return (
+    <>
+    <Header />
     <div className="user-profile-wrapper">
+      
       <div className="user-profile">
         <button className="btn-back" onClick={() => navigate('/')}>
           Ir a Inicio
@@ -184,6 +190,8 @@ const UserProfile = () => {
         {showImageModal && <ImageModal />}
       </div>
     </div>
+        <Footer/>
+    </>
   );
 };
 
