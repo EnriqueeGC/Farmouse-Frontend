@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
+import { useCart } from '../cart/CartContext'; // 👈 Asegúrate que esta ruta sea correcta
 
 import "./ProductBySubcategory.css";
 
@@ -11,6 +12,9 @@ const ProductBySubcategory = () => {
   const [productos, setProductos] = useState([]);
   const [nombreSubcategoria, setNombreSubcategoria] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const [quantities, setQuantities] = useState({});
+    const { addToCart } = useCart(); // 👈 Hook del carrito
 
   useEffect(() => {
     const fetchDatos = async () => {
@@ -35,6 +39,18 @@ const ProductBySubcategory = () => {
     fetchDatos();
   }, [id_subcategoria]);
 
+  const handleBuyNow = (product) => {
+    const quantity = quantities[product.id_producto] || 1;
+    const item = {
+      idAlimento: product.id_producto,
+      nombre: product.nombre,
+      precio: parseFloat(product.precio),
+      quantity: quantity,
+      imagen: product.url_imagen
+    };
+    addToCart(item); // 👈 Se agrega al carrito
+  };
+
   if (loading) return <p>Cargando productos...</p>;
 
   return (
@@ -57,7 +73,17 @@ const ProductBySubcategory = () => {
                 <p className="precio">
                   <strong>${producto.precio}</strong>
                 </p>
-                <button className="btn-comprar">Comprar ahora</button>
+              <div className="quantity-selector">
+                <label>Cantidad:</label>
+                <input
+                  type="number"
+                  min="1"
+                  value={quantities[producto.id_producto] || 1}
+                  onChange={(e) => handleQuantityChange(producto.id_producto, e.target.value)}
+                />
+              </div>
+
+                <button className="btn-comprar" onClick={() => handleBuyNow(producto)}>Comprar ahora</button>
               </div>
             ))
           )}

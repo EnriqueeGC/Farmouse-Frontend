@@ -1,38 +1,59 @@
 .submenu-container {
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  min-width: 240px;
+  animation: fadeInSlide 0.4s ease;
 }
 
-.submenu-empty {
-    background-color: #f5f5f5;
-    color: #333;
-    padding: 1rem;
-}
-
-.submenu-filled {
-    background-color: #00a9e0; /* Color celeste claro */
-    padding: 0; /* padding se gestiona por secciones */
-    color: white;
+@keyframes fadeInSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .submenu-title {
-    background-color: #003366; /* Azul oscuro para el título */
-    padding: 1rem;
-}
-
-.submenu-title h3 {
-    margin: 0;
+  background: linear-gradient(135deg, #009fe3, #00bcd4);
+  padding: 1rem 1.2rem;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .submenu-list {
-    list-style-type: none;
-    padding: 1rem;
-    margin: 0;
+  list-style: none;
+  padding: 0.8rem 1rem;
+  margin: 0;
+}
+
+.submenu-list li {
+  margin-bottom: 0.6rem;
+}
+
+.submenu-list li a {
+  display: block;
+  background-color: #f5faff;
+  color: #004d66;
+  text-decoration: none;
+  padding: 0.6rem 0.9rem;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.25s ease-in-out;
 }
 
 .submenu-list li a:hover {
-    background-color: #007bff;
-    color: white;
-  }
-  
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  color: white;
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 114, 255, 0.2);
+}

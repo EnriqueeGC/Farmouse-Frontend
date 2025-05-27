@@ -123,8 +123,8 @@ const UserProfile = () => {
 
   const ImageModal = () => (
     <div className="image-modal">
-      
       <div className="image-modal-content">
+        <button className="modal-close" onClick={closeImageModal}>✖</button>
         <h3>Editar imagen del perfil</h3>
         <div className="image-preview">
           {selectedImagePreview
@@ -133,64 +133,67 @@ const UserProfile = () => {
         </div>
         <input type="file" accept=".png,.jpg,.jpeg" onChange={handleImageChange} />
         <div className="image-hint">Imagen (máx 5MB, formatos .png/.jpg)</div>
-        <button onClick={closeImageModal}>Cancelar</button>
-        <button onClick={() => setShowImageModal(false)} disabled={!selectedFile}>Guardar imagen</button>
+        <div style={{ marginTop: '20px' }}>
+          <button onClick={closeImageModal}>Cancelar</button>
+          <button
+            onClick={() => setShowImageModal(false)}
+            disabled={!selectedFile}
+            style={{ marginLeft: '10px' }}
+          >
+            Guardar imagen
+          </button>
+        </div>
       </div>
     </div>
   );
 
   return (
     <>
-    <Header />
-    <div className="user-profile-wrapper">
-      
-      <div className="user-profile">
-        <button className="btn-back" onClick={() => navigate('/')}>
-          Ir a Inicio
-        </button>
-        <button className="btn-logout" onClick={handleLogout}>
-          Cerrar Sesión
-        </button>
+      <Header />
+      <div className="user-profile-wrapper">
+        <div className="user-profile">
 
-        <div className="profile-image-container">
-          <img
-            src={editData.url_imagen || defaultProfile}
-            alt="Foto de perfil"
-          />
-          {isEditing && (
-            <button className="edit-photo-button" onClick={openImageModal}>
-              <i className="ri-pencil-line" />
-            </button>
+          <button className="btn-back" onClick={() => navigate('/')}>Ir a Inicio</button>
+          <button className="btn-logout" onClick={handleLogout}>Cerrar Sesión</button>
+
+          <div className="profile-image-container">
+            <img src={editData.url_imagen || defaultProfile} alt="Foto de perfil" />
+            {isEditing && (
+              <button className="edit-photo-button" onClick={openImageModal}>
+                ✎
+              </button>
+            )}
+          </div>
+
+          {isEditing ? (
+            <>
+              <div className="form-section">
+                <input type="text" name="nombre" value={editData.nombre || ''} onChange={handleInputChange} placeholder="Nombre" />
+                <input type="text" name="apellido" value={editData.apellido || ''} onChange={handleInputChange} placeholder="Apellido" />
+                <input type="email" name="correo" value={editData.correo || ''} onChange={handleInputChange} placeholder="Correo" />
+                <input type="text" name="direccion" value={editData.direccion || ''} onChange={handleInputChange} placeholder="Dirección" />
+                <input type="text" name="telefono" value={editData.telefono || ''} onChange={handleInputChange} placeholder="Teléfono" />
+                <input type="text" name="nombre_usuario" value={editData.nombre_usuario || ''} onChange={handleInputChange} placeholder="Nombre de Usuario" />
+                <button onClick={handleSaveChanges}>Guardar cambios</button>
+                <button onClick={() => setIsEditing(false)}>Cancelar</button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p>Nombre: {clientData.nombre}</p>
+              <p>Apellido: {clientData.apellido}</p>
+              <p>Correo: {clientData.correo}</p>
+              <p>Dirección: {clientData.direccion}</p>
+              <p>Teléfono: {clientData.telefono}</p>
+              <p>Nombre de Usuario: {clientData.nombre_usuario}</p>
+              <button onClick={() => setIsEditing(true)}>Editar perfil</button>
+            </>
           )}
+
+          {showImageModal && <ImageModal />}
         </div>
-
-        {isEditing ? (
-          <>
-            <input type="text" name="nombre" value={editData.nombre || ''} onChange={handleInputChange} placeholder="Nombre" />
-            <input type="text" name="apellido" value={editData.apellido || ''} onChange={handleInputChange} placeholder="Apellido" />
-            <input type="email" name="correo" value={editData.correo || ''} onChange={handleInputChange} placeholder="Correo" />
-            <input type="text" name="direccion" value={editData.direccion || ''} onChange={handleInputChange} placeholder="Dirección" />
-            <input type="text" name="telefono" value={editData.telefono || ''} onChange={handleInputChange} placeholder="Teléfono" />
-            <input type="text" name="nombre_usuario" value={editData.nombre_usuario || ''} onChange={handleInputChange} placeholder="Nombre de Usuario" />
-            <button onClick={handleSaveChanges}>Guardar cambios</button>
-            <button onClick={() => setIsEditing(false)}>Cancelar</button>
-          </>
-        ) : (
-          <>
-            <p>Nombre: {clientData.nombre}</p>
-            <p>Apellido: {clientData.apellido}</p>
-            <p>Correo: {clientData.correo}</p>
-            <p>Dirección: {clientData.direccion}</p>
-            <p>Teléfono: {clientData.telefono}</p>
-            <p>Nombre de Usuario: {clientData.nombre_usuario}</p>
-            <button onClick={() => setIsEditing(true)}>Editar perfil</button>
-          </>
-        )}
-
-        {showImageModal && <ImageModal />}
       </div>
-    </div>
-        <Footer/>
+      <Footer />
     </>
   );
 };
