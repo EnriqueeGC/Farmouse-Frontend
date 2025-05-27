@@ -12,7 +12,7 @@ function AdminPedidos() {
 
   const fetchPedidos = async () => {
     try {
-      const res = await axios.get("https://farmouse.onrender.com/api/pedidos"); // ajusta si usas otro puerto
+      const res = await axios.get("http://localhost:3000/api/pedidos/"); // ajusta si usas otro puerto
       setPedidos(res.data?.data || []);
     } catch (err) {
       console.error("❌ Error al cargar pedidos:", err);
