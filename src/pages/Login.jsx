@@ -4,7 +4,6 @@ import CrearClienteForm from './CrearClienteForm.jsx';
 import './LoginStyles.css';
 import logoImg from '../assets/images/Logo.png';
 
-
 const Login = () => {
     const [isRightPanelActive, setIsRightPanelActive] = useState(false);
     const [username, setUsername] = useState('');
@@ -23,8 +22,8 @@ const Login = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    nombre_usuario: username,
-                    contrasenia: password
+                    nombre_usuario: username.trim().toLowerCase(),
+                    contrasenia: password.trim()
                 }),
             });
 
@@ -45,7 +44,6 @@ const Login = () => {
     };
 
     const handleBackToHomeClick = () => {
-        console.log("Volver a inicio presionado");
         navigate('/');
     };
 
@@ -81,8 +79,7 @@ const Login = () => {
                 <div className="overlay-container">
                     <div className="overlay">
                         <div className="overlay-panel overlay-left">
-                            {/* Imagen superior izquierda (inicio de sesión) */}
-                              <img src={logoImg} alt="Logo de Farmacia" className="overlay-image float-rotate" />   
+                            <img src={logoImg} alt="Logo de Farmacia" className="overlay-image float-rotate" />
                             <h1>¡Bienvenido de nuevo! Farmacias Doctor Goku</h1>
                             <p>Para mantenerse conectado, por favor inicia sesión</p>
                             <button className="ghost" onClick={() => setIsRightPanelActive(false)}>
@@ -90,7 +87,6 @@ const Login = () => {
                             </button>
                         </div>
                         <div className="overlay-panel overlay-right">
-                            {/* Imagen superior derecha (registro) */}
                             <img src={logoImg} alt="Logo de Farmacia" className="overlay-image float-rotate" />
                             <h1>Farmacias Doctor Goku</h1>
                             <p>Ingresa tus datos y crea tu cuenta</p>

@@ -29,13 +29,13 @@ const CrearClienteForm = () => {
 
         try {
             const response = await axios.post('https://farmouse.onrender.com/user/', {
-                nombre: formData.nombre,
-                correo: formData.correo,
-                apellido: formData.apellido,
-                direccion: formData.direccion,
-                telefono: formData.telefono,
-                nombre_usuario: formData.nombre_usuario,
-                contrasenia: formData.contrasenia, // Enviar como texto plano
+                nombre: formData.nombre.trim(),
+                correo: formData.correo.trim().toLowerCase(),
+                apellido: formData.apellido.trim(),
+                direccion: formData.direccion.trim(),
+                telefono: formData.telefono.trim(),
+                nombre_usuario: formData.nombre_usuario.trim().toLowerCase(),
+                contrasenia: formData.contrasenia.trim(),
                 rol: 3,
             });
 
