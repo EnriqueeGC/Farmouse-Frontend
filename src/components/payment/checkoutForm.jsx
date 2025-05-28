@@ -31,6 +31,8 @@ const CheckoutFormInner = () => {
   const [totalAmount, setTotalAmount] = useState(0);
   const [clientSecret, setClientSecret] = useState("");
   const [idPedido, setIdPedido] = useState(null);
+  const [facturaURL, setFacturaURL] = useState("");
+  const [pagoExitoso, setPagoExitoso] = useState(false);
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -50,7 +52,6 @@ const CheckoutFormInner = () => {
     e.preventDefault();
 
     try {
-      // 1. Registrar pedido
       const response = await axios.post(
         "https://farmouse.onrender.com/api/payment/register-payment",
         {
@@ -63,7 +64,6 @@ const CheckoutFormInner = () => {
       const { id_pedido, total } = response.data;
       setIdPedido(id_pedido);
 
-      // 2. Crear PaymentIntent
       const stripeResponse = await axios.post(
         "https://farmouse.onrender.com/api/payment/create-payment-intent",
         {
@@ -100,7 +100,6 @@ const CheckoutFormInner = () => {
     } else {
       if (result.paymentIntent.status === "succeeded") {
         try {
-          // Confirmar el pago en tu backend
           const confirmResponse = await axios.post(
             "https://farmouse.onrender.com/api/payment/confirm-payment",
             {
@@ -110,8 +109,9 @@ const CheckoutFormInner = () => {
 
           alert("Pago exitoso");
 
-          // Descargar o abrir la factura
-          window.open(confirmResponse.data.factura_url, "_blank");
+          // Guardar URL de factura para mostrar botón
+          setFacturaURL(confirmResponse.data.factura_url);
+          setPagoExitoso(true);
 
           // Limpiar formulario
           setFormData({
@@ -123,23 +123,29 @@ const CheckoutFormInner = () => {
             notas: "",
           });
 
-          // Limpiar tarjeta
           cardElement.clear();
 
-          // Limpiar carrito y estados relacionados
           localStorage.removeItem("cartItems");
           setCartItems([]);
           setClientSecret("");
           setIdPedido(null);
           setTotalAmount(0);
 
-          // Redireccionar al menú principal
-          window.location.href = "/"; // Cambia esto según tu ruta
         } catch (err) {
           console.error("Error al confirmar el pago:", err);
         }
       }
     }
+  };
+
+  const handleDownloadFactura = () => {
+    if (facturaURL) {
+      window.open(facturaURL, "_blank");
+    }
+  };
+
+  const handleGoHome = () => {
+    window.location.href = "/"; // Cambia si usas otro path
   };
 
   return (
@@ -209,7 +215,7 @@ const CheckoutFormInner = () => {
         </button>
       </form>
 
-      {clientSecret && (
+      {clientSecret && !pagoExitoso && (
         <form onSubmit={handlePayment} className="checkout-form-payment">
           <h3 className="checkout-title">Datos de la tarjeta</h3>
           <div className="checkout-card-element">
@@ -223,6 +229,21 @@ const CheckoutFormInner = () => {
             Pagar
           </button>
         </form>
+      )}
+
+      {pagoExitoso && (
+        <div className="checkout-post-payment">
+          <h3>¡Gracias por tu compra!</h3>
+          <button
+            onClick={handleDownloadFactura}
+            className="checkout-btn download-btn"
+          >
+            Descargar factura
+          </button>
+          <button onClick={handleGoHome} className="checkout-btn home-btn">
+            Ir al inicio
+          </button>
+        </div>
       )}
     </div>
   );
