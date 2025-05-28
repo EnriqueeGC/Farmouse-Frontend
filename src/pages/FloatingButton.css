@@ -102,11 +102,11 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 210px; /* ⬅️ tamaño triplicado */
-  height: 210px;
+  width: 70px;
+  height: 70px;
   background-color: transparent;
   border-radius: 50%;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -118,7 +118,7 @@
 }
 
 .chatbot-bubble:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .chatbot-bubble-logo {
@@ -127,4 +127,5 @@
   object-fit: cover;
   border-radius: 50%;
 }
+
 
