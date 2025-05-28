@@ -135,8 +135,6 @@ const Header = () => {
   const [subcategory, setSubcategory] = useState([]);
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const [busqueda, setBusqueda] = useState("");
-
   useEffect(() => {
     if (cartItems.length > 0) {
       setCartUpdated(true);
@@ -191,7 +189,7 @@ const Header = () => {
   const handleMouseEnterSubcategory = async (index, event) => {
     const categoriaId = navLinks[index].id;
     if (!categoriaId) return;
-
+  
     try {
       const response = await fetch(
         `https://farmouse.onrender.com/subcategory/category/${categoriaId}`
@@ -200,7 +198,7 @@ const Header = () => {
       setSubcategory(data.data);
       setActiveIndex(index); // <- importante
       setShowSubmenu(true);
-
+  
       const iconRect = event.currentTarget.getBoundingClientRect();
       setSubmenuPosition({
         top: iconRect.top + iconRect.height + window.scrollY,
@@ -210,21 +208,13 @@ const Header = () => {
       console.error("Error fetching subcategories:", error);
     }
   };
+  
 
   const handleMouseLeave = () => {
     setTimeout(() => {
       setShowSubmenu(false);
       setActiveIndex(null);
     }, 200); // puedes ajustar el tiempo (ms)
-  };
-
-  const handleKeyDown = (e) => {
-    console.log('esto es un test');
-    
-    if (e.key === "Enter" && busqueda.trim() !== "") {
-      e.preventDefault(); // evitar comportamiento por defecto
-      navigate(`/productos/${busqueda}`);
-    }
   };
 
   return (
@@ -260,34 +250,21 @@ const Header = () => {
             type="text"
             placeholder="¿Qué estás buscando?"
             className="search-input"
-            value={busqueda}
-            onChange={(e) => setBusqueda(e.target.value)}
-            onKeyDown={handleKeyDown}
           />
-
-          <div className="right-icons">
-            <div
-              className={`cart__icon ${cartUpdated ? "cart-icon-updated" : ""}`}
-            >
-              <Link to="/cart">
-                <img
-                  src={cart}
-                  alt="Carrito"
-                  style={{ width: "25px", height: "25px" }}
-                />
-                <span className="cart-count">{cartItems.length}</span>
-              </Link>
-            </div>
-            <div className="login__icon">
-              <span onClick={handleLoginClick} style={{ cursor: "pointer" }}>
-                <img
-                  src={log}
-                  alt="Login"
-                  style={{ width: "25px", height: "25px" }}
-                />
-              </span>
-            </div>
+         <div className="right-icons">
+          <div className={`cart__icon ${cartUpdated ? "cart-icon-updated" : ""}`}>
+            <Link to="/cart" style={{ position: "relative", display: "inline-block" }}>
+              <i className="ri-shopping-cart-line" style={{ fontSize: "25px" }}></i>
+              <span className="cart-count">{cartItems.length}</span>
+            </Link>
           </div>
+          <div className="login__icon">
+            <span onClick={handleLoginClick} style={{ cursor: "pointer" }}>
+              <i className="ri-user-line" style={{ fontSize: "25px" }}></i>
+            </span>
+          </div>
+        </div>
+
         </div>
 
         <div className="nav__menu">

@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './product.css';
-import { useCart } from '../cart/CartContext'; // 👈 Asegúrate que esta ruta sea correcta
+import { useCart } from '../cart/CartContext'; // Ajusta si tu ruta es distinta
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [quantities, setQuantities] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { addToCart } = useCart(); // 👈 Hook del carrito
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
+  const { addToCart } = useCart();
 
   useEffect(() => {
     let isMounted = true;
@@ -17,9 +20,11 @@ const Products = () => {
       try {
         const response = await axios.get('https://farmouse.onrender.com/product');
         if (isMounted) {
-          setProducts(response.data.data);
+          const data = response.data.data;
+          setProducts(data);
+
           const initialQuantities = {};
-          response.data.data.forEach(product => {
+          data.forEach(product => {
             initialQuantities[product.id_producto] = 1;
           });
           setQuantities(initialQuantities);
@@ -54,7 +59,19 @@ const Products = () => {
       quantity: quantity,
       imagen: product.url_imagen
     };
-    addToCart(item); // 👈 Se agrega al carrito
+    addToCart(item);
+  };
+
+  // Paginación
+  const indexOfLastProduct = currentPage * itemsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+
+  const goToPage = (pageNumber) => {
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+    }
   };
 
   if (loading) return <div>Cargando productos...</div>;
@@ -63,8 +80,9 @@ const Products = () => {
   return (
     <div className="products-container">
       <h2>Oferta 3x2</h2>
-      <div className="products-list">
-        {products.map((product) => (
+      <div className="products-header">
+        <div className="products-grid">
+        {currentProducts.map((product) => (
           <div key={product.id_producto} className="product-card">
             <img src={product.url_imagen} alt={product.nombre} className="product-image" />
             <div className="product-info">
@@ -89,6 +107,27 @@ const Products = () => {
           </div>
         ))}
       </div>
+
+      {/* Paginación */}
+      <div className="pagination">
+        <button onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1}>
+          Anterior
+        </button>
+        {[...Array(totalPages).keys()].map(num => (
+          <button
+            key={num + 1}
+            onClick={() => goToPage(num + 1)}
+            className={currentPage === num + 1 ? 'active' : ''}
+          >
+            {num + 1}
+          </button>
+        ))}
+        <button onClick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages}>
+          Siguiente
+        </button>
+      </div>
+      </div>
+      
     </div>
   );
 };

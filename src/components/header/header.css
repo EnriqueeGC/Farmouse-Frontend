@@ -212,29 +212,18 @@
 .cart__icon, .login__icon {
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 70px;  /* Asegura que los íconos tengan un contenedor suficientemente grande */
-    width: 70px;   /* Ajusta el tamaño para que sea consistente */
+    justify-content: center; 
     padding: 10px;
-    border-radius: 50%; /* Hace los íconos redondeados */
-    background-color: #2E3192; /* Fondo azul por defecto */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
-    margin: 0 5px; /* Espaciado entre los íconos */
-    position: relative; /* Para que el contador se posicione correctamente */
-    border: 3px solid white; /* Borde blanco alrededor del ícono */
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+    margin: 0 5px;
+    position: relative; 
 }
 
 /* Estilo para las imágenes (sin el color de fondo) */
-.cart__icon img, .login__icon img {
-    width: 200%;  /* Asegura que la imagen ocupe todo el área del círculo */
-    height: 200%; /* Asegura que la imagen ocupe todo el área del círculo */
-    object-fit: cover; /* Recorta la imagen para ajustarse al círculo sin distorsión */
-    border-radius: 10%; /* Hace la imagen circular */
-}
 
 /* Cambiar el color de fondo y aumentar el tamaño al pasar el ratón */
 .cart__icon:hover, .login__icon:hover {
-    background-color: #F68B1E; /* Cambia el color de fondo al pasar el ratón */
+    background-color: #e1d8d6; /* Cambia el color de fondo al pasar el ratón */
     transform: scale(1.1); /* Efecto de aumentar el tamaño al pasar el ratón */
 }
 
@@ -243,8 +232,8 @@
     position: absolute;
     top: -5px;
     right: -5px;
-    background-color: #FF6347; /* Fondo del contador */
-    color: white;
+    background-color: #e1d8d6; /* Fondo del contador */
+    color: rgb(0, 0, 0);
     font-size: 12px;
     font-weight: bold;
     padding: 2px 6px;
@@ -281,4 +270,25 @@
 .custom-modal .modal {
     display: block !important;
     overflow-y: auto;
+}
+
+.back-to-menu {
+    display: inline-block;
+    margin: 30px 0 15px 20px;
+    padding: 12px 18px;
+    background-color: transparent;
+    border: 2px solid #007bff;
+    color: #007bff;
+    font-weight: 700;
+    font-size: 1.1em;
+    border-radius: 12px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.back-to-menu:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #004085;
 }
